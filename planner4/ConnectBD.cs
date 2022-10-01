@@ -9,7 +9,7 @@ namespace planner4
 {
     public class DataBD
     {
-        public DateTime data { get; set; }
+        public string data { get; set; }
         public string Plan1 { get; set; }
         public string Plan2 { get; set; }
         public string Plan3 { get; set; }
@@ -18,10 +18,10 @@ namespace planner4
         public string Plan6 { get; set; }
         public string Plan7 { get; set; }
         public int CountOfPlan { get; set; }
-        public float Water { get; set; }
-        public float Mood { get; set; }
-        public float Sleep { get; set; }
-        public float Steps { get; set; }
+        public double Water { get; set; }
+        public double Mood { get; set; }
+        public double Sleep { get; set; }
+        public double Steps { get; set; }
         public string Motivation { get; set; }
     }
     public class ConnectBD: DbContext

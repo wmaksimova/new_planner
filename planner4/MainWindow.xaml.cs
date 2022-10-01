@@ -75,6 +75,43 @@ namespace planner4
         {
 
         }
-
+        public Boolean isDataExist()
+        {
+            using (var db = new ConnectBD())
+            {
+                var data = db.AppBD.FirstOrDefault(item => item.data == date_text.Text);
+                if (data != null)
+                {
+                    MessageBox.Show("Нужно удалить данные, чтобы обновить их");
+                    return true;
+                }
+            }
+            return false;
+        }
+        private void button_load_Click(object sender, RoutedEventArgs e)
+        {
+            if (isDataExist()) return;
+            using (var db = new ConnectBD())
+            {
+                db.AppBD.Add(new DataBD()
+                {
+                    data = date_text.Text,
+                    Plan1 = plan_1.Text,
+                    Plan2 = plan_2.Text,
+                    Plan3 = plan_3.Text,
+                    Plan4 = plan_4.Text,
+                    Plan5 = plan_5.Text,
+                    Plan6 = plan_6.Text,
+                    Plan7 = plan_7.Text,
+                    CountOfPlan = int.Parse(count_of_affairs.Text),
+                    Water = slider_water.Value,
+                    Mood = slider_mood.Value,
+                    Sleep = slider_sleep.Value,
+                    Steps = slider_steps.Value,
+                    Motivation = motivation_text.Text
+                });
+                db.SaveChanges();
+            }
+        }
     }
 }
