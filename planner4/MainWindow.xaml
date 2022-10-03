@@ -21,62 +21,59 @@
                     <GradientStop Color="#FF5961F9" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
-
-            <Rectangle Fill="White" Width="244" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="15" />
             <!--<Button x:Name="Button_calendar" Width="30" Height="30" Canvas.Left="16" Canvas.Top="15" RenderTransformOrigin="0.5,0.5"
                     Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Click="Button_calendar_Click" Panel.ZIndex="-2" ClickMode="Press"/>-->
-            <Image x:Name="calendar_image" Source="Resources/calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
+            <Rectangle Fill="White" Width="244" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="15" />
             <TextBox x:Name="date_text" Canvas.Left="62" Canvas.Top="20" Width="180" Height="30"
-                     Background="Transparent" SelectionBrush="Transparent" BorderBrush="Transparent" FontSize="20" IsReadOnlyCaretVisible="True" Foreground="#FFE68EF5"></TextBox>
+                     Background="Transparent" SelectionBrush="Transparent" BorderBrush="Transparent" FontSize="20" IsReadOnlyCaretVisible="True" Foreground="#FFE68EF5"/>
             <Calendar x:Name="calendar_planner" Canvas.Left="383" Visibility="Hidden" SelectedDatesChanged="calendar_planner_SelectedDatesChanged"/>
 
 
-            <TextBox Canvas.Left="15" Canvas.Top="76" BorderBrush="#00000000" Background="Transparent" FontSize="18" TextWrapping="Wrap" Width="272" Foreground="White" SelectionBrush="#000078D7" FontWeight="Bold">Сколько дел запланировано на сегодня?</TextBox>
-            <Rectangle Fill="White" Width="45" Height="20" RadiusX="10" RadiusY="10" Canvas.Left="131" Canvas.Top="107" />
-            <TextBox x:Name="count_of_affairs" Grid.Column="0" Canvas.Left="143" Canvas.Top="108" Background="Transparent">1</TextBox>
+            <TextBox Canvas.Left="15" Canvas.Top="76" BorderBrush="#00000000" Background="Transparent" FontSize="18" TextWrapping="Wrap" Width="272" Foreground="White" SelectionBrush="#000078D7" FontWeight="Bold" Text="Сколько дел запланировано на сегодня?"/>
+            <Rectangle Fill="White" Width="56" Height="24" RadiusX="10" RadiusY="10" Canvas.Left="137" Canvas.Top="102" />
+            <TextBox x:Name="count_of_affairs" Grid.Column="0" Canvas.Left="159" Canvas.Top="104" Background="Transparent" FontSize="14" FontWeight="Bold" Text="1"/>
 
-            <Button FontSize="8" Click="Button_Click_1" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="158" Canvas.Top="108" Height="7">+</Button>
-            <Button FontSize="8" Click="Button_Click_2" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="158" Canvas.Top="116" Height="6">-</Button>
+            <Button FontSize="16" Click="Button_Click_1" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="175" Canvas.Top="104" Height="15" Width="15" Content="+"/>
+            <Button FontSize="16" Click="Button_Click_2" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="144" Canvas.Top="102" Height="16" Content="-"/>
 
 
             <ListBox x:Name="tools_for_day" Canvas.Left="10" Canvas.Top="162" Width="360" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent">
                 <ListBoxItem x:Name="list_item_1" >
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_1"></TextBox>
+                        <TextBox x:Name="plan_1"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem>
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_2"></TextBox>
+                        <TextBox x:Name="plan_2"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem>
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_3"></TextBox>
+                        <TextBox x:Name="plan_3"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem>
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_4"></TextBox>
+                        <TextBox x:Name="plan_4"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem>
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_5"></TextBox>
+                        <TextBox x:Name="plan_5"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem>
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_6"></TextBox>
+                        <TextBox x:Name="plan_6"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem>
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_7"></TextBox>
+                        <TextBox x:Name="plan_7"/>
                     </Border>
                 </ListBoxItem>
             </ListBox>
-            <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="21" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070"/>
             <Rectangle Fill="#FF742F68" Width="200" Height="343" RadiusX="15" RadiusY="15" Canvas.Left="375" Canvas.Top="200" />
             <Rectangle Fill="White" Width="171" Height="25" RadiusX="15" RadiusY="15" Canvas.Left="390" Canvas.Top="206" />
             <Slider x:Name="slider_water" Canvas.Left="391" Canvas.Top="249" Height="18" Width="174" ValueChanged="Slider_ValueChanged" Foreground="#FF742F68" Background="#00742F68" RenderTransformOrigin="0.5,0.5">
@@ -102,10 +99,14 @@
             <TextBox Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Шаги" Canvas.Top="431" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold"/>
             <Rectangle Fill="#FFE68EF5" Width="560" Height="80" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="564" />
             <Rectangle Fill="white" Width="541" Height="56" RadiusX="15" RadiusY="15" Canvas.Left="23" Canvas.Top="575" />
-            <TextBox Canvas.Left="37" Canvas.Top="586" Width="513" Height="34"></TextBox>
+            <TextBox Canvas.Left="37" Canvas.Top="586" Width="513" Height="34"/>
             <TextBox Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68"/>
             <Button x:Name="button_load" Content="Сохранить" Height="29" Canvas.Left="287" Canvas.Top="21" Width="67" Click="button_load_Click"/>
             <TextBox x:Name="motivation_text" Height="30" Canvas.Left="247" Canvas.Top="590" Text="TextBox" TextWrapping="Wrap" Width="280"/>
+            <!--<Button x:Name="Button_calendar" Width="30" Height="30" Canvas.Left="16" Canvas.Top="15" RenderTransformOrigin="0.5,0.5"
+                    Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Click="Button_calendar_Click" Panel.ZIndex="-2" ClickMode="Press"/>-->
+            <Image x:Name="calendar_image" Source="C:\Users\ПК\Desktop\git\planner4\Resources\calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
+            <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000"/>
         </Canvas>
     </Grid>
 </Window>
