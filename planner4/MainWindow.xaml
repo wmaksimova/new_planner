@@ -43,32 +43,32 @@
                         <TextBox x:Name="plan_1"/>
                     </Border>
                 </ListBoxItem>
-                <ListBoxItem>
+                <ListBoxItem x:Name="list_item_2">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
                         <TextBox x:Name="plan_2"/>
                     </Border>
                 </ListBoxItem>
-                <ListBoxItem>
+                <ListBoxItem x:Name="list_item_3">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
                         <TextBox x:Name="plan_3"/>
                     </Border>
                 </ListBoxItem>
-                <ListBoxItem>
+                <ListBoxItem x:Name="list_item_4">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
                         <TextBox x:Name="plan_4"/>
                     </Border>
                 </ListBoxItem>
-                <ListBoxItem>
+                <ListBoxItem x:Name="list_item_5">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
                         <TextBox x:Name="plan_5"/>
                     </Border>
                 </ListBoxItem>
-                <ListBoxItem>
+                <ListBoxItem x:Name="list_item_6">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
                         <TextBox x:Name="plan_6"/>
                     </Border>
                 </ListBoxItem>
-                <ListBoxItem>
+                <ListBoxItem x:Name="list_item_7">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
                         <TextBox x:Name="plan_7"/>
                     </Border>
@@ -105,7 +105,7 @@
             <TextBox x:Name="motivation_text" Height="30" Canvas.Left="247" Canvas.Top="590" Text="TextBox" TextWrapping="Wrap" Width="280"/>
             <!--<Button x:Name="Button_calendar" Width="30" Height="30" Canvas.Left="16" Canvas.Top="15" RenderTransformOrigin="0.5,0.5"
                     Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Click="Button_calendar_Click" Panel.ZIndex="-2" ClickMode="Press"/>-->
-            <Image x:Name="calendar_image" Source="C:\Users\ПК\Desktop\git\planner4\Resources\calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
+            <Image x:Name="calendar_image" Source="Resources\calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
             <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000"/>
         </Canvas>
     </Grid>
