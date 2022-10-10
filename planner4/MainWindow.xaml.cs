@@ -21,6 +21,7 @@ namespace planner4
     /// </summary>
     public partial class MainWindow : Window
     {
+       
         /// <summary>
         /// Finds a Child of a given item in the visual tree. 
         /// </summary>
@@ -77,7 +78,6 @@ namespace planner4
         {
             InitializeComponent();
             date_text.Text = DateTime.Today.ToLongDateString();
-            list_item_1.Visibility = Visibility.Visible;
             list_item_2.Visibility = Visibility.Hidden;
             list_item_3.Visibility = Visibility.Hidden;
             list_item_4.Visibility = Visibility.Hidden;
@@ -93,6 +93,7 @@ namespace planner4
             date_text.Text = data.ToLongDateString();
             calendar_planner.Visibility = Visibility.Hidden;
             date_text.Visibility = Visibility;
+
             for (int i = 1; i <= 7; i++)
             {
                 string TBText = "plan_" + i;
@@ -121,6 +122,7 @@ namespace planner4
             }
         }
 
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             int n = int.Parse(count_of_affairs.Text);
@@ -148,6 +150,9 @@ namespace planner4
             }
             else
             {
+                
+                ListBoxItem list = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
+                list.Visibility = Visibility.Hidden;
                 n--;
                 count_of_affairs.Text = n.ToString();
                 ListBoxItem item = Application.Current.MainWindow.FindName("list_item_" + (n+1)) as ListBoxItem;
@@ -205,5 +210,6 @@ namespace planner4
             }
             MessageBox.Show("Данные сохранены");
         }
+        
     }
 }
