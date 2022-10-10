@@ -77,12 +77,18 @@ namespace planner4
         {
             InitializeComponent();
             date_text.Text = DateTime.Today.ToLongDateString();
+            list_item_1.Visibility = Visibility.Visible;
+            list_item_2.Visibility = Visibility.Hidden;
+            list_item_3.Visibility = Visibility.Hidden;
+            list_item_4.Visibility = Visibility.Hidden;
+            list_item_5.Visibility = Visibility.Hidden;
+            list_item_6.Visibility = Visibility.Hidden;
+            list_item_7.Visibility = Visibility.Hidden;
         }
-
-
 
         private void calendar_planner_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            choose_text.Visibility = Visibility.Hidden;
             DateTime data = (DateTime)calendar_planner.SelectedDate;
             date_text.Text = data.ToLongDateString();
             calendar_planner.Visibility = Visibility.Hidden;
@@ -126,6 +132,10 @@ namespace planner4
             {
                 n++;
                 count_of_affairs.Text = n.ToString();
+                ListBoxItem item = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
+                TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
+                text.Text = "";
+                item.Visibility = Visibility;
             }
         }
 
@@ -140,6 +150,8 @@ namespace planner4
             {
                 n--;
                 count_of_affairs.Text = n.ToString();
+                ListBoxItem item = Application.Current.MainWindow.FindName("list_item_" + (n+1)) as ListBoxItem;
+                item.Visibility = Visibility.Hidden;
             }
         }
 
@@ -191,6 +203,7 @@ namespace planner4
                 }
                 db.SaveChanges();
             }
+            MessageBox.Show("Данные сохранены");
         }
     }
 }
