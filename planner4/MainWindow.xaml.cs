@@ -131,11 +131,11 @@ namespace planner4
             else
             {
                 n++;
-                count_of_affairs.Text = n.ToString();
-                ListBoxItem item = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
+                ListBoxItem list = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
                 TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
                 text.Text = "";
-                item.Visibility = Visibility;
+                list.Visibility = Visibility.Visible;
+                count_of_affairs.Text = n.ToString();
             }
         }
 
