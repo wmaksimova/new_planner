@@ -77,7 +77,8 @@ namespace planner4
         public MainWindow()
         {
             InitializeComponent();
-            date_text.Text = DateTime.Today.ToLongDateString();
+            date_text.Visibility = Visibility.Hidden;
+            choose_text.IsReadOnly = true;
             list_item_2.Visibility = Visibility.Hidden;
             list_item_3.Visibility = Visibility.Hidden;
             list_item_4.Visibility = Visibility.Hidden;
@@ -98,8 +99,11 @@ namespace planner4
             {
                 string TBText = "plan_" + i;
                 FindChild<TextBox>(Application.Current.MainWindow, TBText).Text = "";
-                
             }
+            slider_water.Value = 0;
+            slider_mood.Value = 0;
+            slider_sleep.Value = 0;
+            slider_steps.Value = 0;
             using (var db = new ConnectBD())
             {
                 var selectedDate = data;
@@ -112,13 +116,24 @@ namespace planner4
                     db.SaveChanges();
                     dayIndex = selectedDay.id;
                 }
-
-                foreach (var item in db.plans.Where(x=> x.rel_day_id == dayIndex))//ищем план и записываем его
+                    foreach (var item in db.plans.Where(x => x.rel_day_id == dayIndex))//ищем план и записываем его
+                    {
+                        string TBText = "plan_" + item.plan_position;
+                        string TBList = "list_item_" + item.plan_position;
+                        var TB = FindChild<TextBox>(Application.Current.MainWindow, TBText);
+                        var listTB = FindChild<ListBoxItem>(Application.Current.MainWindow, TBList);
+                        listTB.Visibility = Visibility;
+                        TB.Text = item.plan;
+                    count_of_affairs.Text = item.count_of_plan.ToString();
+                    }
+                foreach (var track in db.tracker.Where(x => x.rel_tracker_day_id == dayIndex))
                 {
-                    string TBText = "plan_" + item.plan_position;
-                    var TB = FindChild<TextBox>(Application.Current.MainWindow, TBText);
-                    TB.Text = item.plan;
+                    slider_water.Value = track.water;
+                    slider_mood.Value = track.mood;
+                    slider_sleep.Value = track.sleep;
+                    slider_steps.Value = track.steps;
                 }
+
             }
         }
 
@@ -195,17 +210,24 @@ namespace planner4
                     db.plans.RemoveRange(db.plans.Where(x => x.rel_day_id == dayIndex));
                     db.SaveChanges();
                 }
-                
-                
+
                 for (int i = 1; i <= 7; i++)
                 {
                     string TBText = "plan_" + i;
                     var text = FindChild<TextBox>(Application.Current.MainWindow, TBText).Text;
                     if (text.Length>0)
                     {
-                        db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position=i});
+                        db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position=i, count_of_plan=int.Parse(count_of_affairs.Text)});
                     }
                 }
+                db.tracker.Add(new trackerModel
+                {
+                    rel_tracker_day_id = dayIndex.Value,
+                    water = (int)slider_water.Value,
+                    mood = (int)slider_mood.Value,
+                    sleep = (int)slider_sleep.Value,
+                    steps = (int)slider_steps.Value
+                }); 
                 db.SaveChanges();
             }
             MessageBox.Show("Данные сохранены");
