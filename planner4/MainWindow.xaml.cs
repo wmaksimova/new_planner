@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -74,6 +76,7 @@ namespace planner4
 
             return foundChild;
         }
+        public List<string> listik = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
@@ -85,25 +88,40 @@ namespace planner4
             list_item_5.Visibility = Visibility.Hidden;
             list_item_6.Visibility = Visibility.Hidden;
             list_item_7.Visibility = Visibility.Hidden;
+            StreamReader sr = new StreamReader("motivation.txt");
+            string[] lines = sr.ReadToEnd().Split("\r\n");
+            foreach (var item in lines)
+            {
+                listik.Add(item);
+            }
+            motivation_text.Visibility = Visibility.Hidden;
         }
-
         private void calendar_planner_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            Random rnd = new Random();
+            motivation_text.Visibility = Visibility;
+            motivation_text.Text = listik[rnd.Next(1,listik.Count())];
             choose_text.Visibility = Visibility.Hidden;
             DateTime data = (DateTime)calendar_planner.SelectedDate;
             date_text.Text = data.ToLongDateString();
             calendar_planner.Visibility = Visibility.Hidden;
             date_text.Visibility = Visibility;
-
             for (int i = 1; i <= 7; i++)
             {
                 string TBText = "plan_" + i;
                 FindChild<TextBox>(Application.Current.MainWindow, TBText).Text = "";
             }
-            slider_water.Value = 0;
-            slider_mood.Value = 0;
-            slider_sleep.Value = 0;
-            slider_steps.Value = 0;
+            count_of_affairs.Text = "1";
+            list_item_2.Visibility = Visibility.Hidden;
+            list_item_3.Visibility = Visibility.Hidden;
+            list_item_4.Visibility = Visibility.Hidden;
+            list_item_5.Visibility = Visibility.Hidden;
+            list_item_6.Visibility = Visibility.Hidden;
+            list_item_7.Visibility = Visibility.Hidden;
+            slider_water.Text = "0";
+            slider_mood.Text = "0";
+            slider_sleep.Text = "0";
+            slider_steps.Text = "0";
             using (var db = new ConnectBD())
             {
                 var selectedDate = data;
@@ -124,16 +142,19 @@ namespace planner4
                         var listTB = FindChild<ListBoxItem>(Application.Current.MainWindow, TBList);
                         listTB.Visibility = Visibility;
                         TB.Text = item.plan;
-                    count_of_affairs.Text = item.count_of_plan.ToString();
+                        count_of_affairs.Text = item.count_of_plan.ToString();
                     }
                 foreach (var track in db.tracker.Where(x => x.rel_tracker_day_id == dayIndex))
                 {
-                    slider_water.Value = track.water;
-                    slider_mood.Value = track.mood;
-                    slider_sleep.Value = track.sleep;
-                    slider_steps.Value = track.steps;
+                    slider_water_thumb.Value = track.water;
+                    slider_mood_thumb.Value = track.mood;
+                    slider_sleep_thumb.Value = track.sleep;
+                    slider_steps_thumb.Value = track.steps;
+                    slider_water.Text = track.water.ToString();
+                    slider_mood.Text = track.mood.ToString();
+                    slider_sleep.Text = track.sleep.ToString();
+                    slider_steps.Text = track.steps.ToString();
                 }
-
             }
         }
 
@@ -150,7 +171,6 @@ namespace planner4
                 n++;
                 ListBoxItem list = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
                 TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
-                text.Text = "";
                 list.Visibility = Visibility.Visible;
                 count_of_affairs.Text = n.ToString();
             }
@@ -165,8 +185,8 @@ namespace planner4
             }
             else
             {
-                
                 ListBoxItem list = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
+                TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
                 list.Visibility = Visibility.Hidden;
                 n--;
                 count_of_affairs.Text = n.ToString();
@@ -180,11 +200,6 @@ namespace planner4
         {
             calendar_planner.Visibility = Visibility;
             date_text.Visibility = Visibility.Hidden;
-        }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
         }
         public Boolean isDataExist()
         {
@@ -223,10 +238,10 @@ namespace planner4
                 db.tracker.Add(new trackerModel
                 {
                     rel_tracker_day_id = dayIndex.Value,
-                    water = (int)slider_water.Value,
-                    mood = (int)slider_mood.Value,
-                    sleep = (int)slider_sleep.Value,
-                    steps = (int)slider_steps.Value
+                    water = int.Parse(slider_water.Text),
+                    mood = int.Parse(slider_mood.Text),
+                    sleep = int.Parse(slider_sleep.Text),
+                    steps = int.Parse(slider_steps.Text)
                 }); 
                 db.SaveChanges();
             }
