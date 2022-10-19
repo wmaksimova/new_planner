@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="700" Width="623">
+        Icon="/img/calendar-iconpng.png"
+        Title="Planner" Height="700" Width="623">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="417*"/>

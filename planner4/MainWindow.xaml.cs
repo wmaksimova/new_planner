@@ -225,14 +225,15 @@ namespace planner4
                     db.plans.RemoveRange(db.plans.Where(x => x.rel_day_id == dayIndex));
                     db.SaveChanges();
                 }
-
+                int countaff = 0;
                 for (int i = 1; i <= 7; i++)
                 {
                     string TBText = "plan_" + i;
                     var text = FindChild<TextBox>(Application.Current.MainWindow, TBText).Text;
-                    if (text.Length>0)
+                    if (text.Length > 0)
                     {
-                        db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position=i, count_of_plan=int.Parse(count_of_affairs.Text)});
+                        countaff++;
+                        db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position = i, count_of_plan = countaff });
                     }
                 }
                 db.tracker.Add(new trackerModel
