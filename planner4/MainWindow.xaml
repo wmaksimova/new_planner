@@ -94,8 +94,8 @@
                     Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Click="Button_calendar_Click" Panel.ZIndex="-2" ClickMode="Press"/>-->
             <Image x:Name="calendar_image" Source="/img/calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
             <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000"/>
-            <Rectangle Fill="#FF742F68" Width="89" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="276" Canvas.Top="15" />
-            <Button x:Name="button_load" Content="Сохранить" Height="29" Canvas.Left="279" Canvas.Top="18" Width="83" Click="button_load_Click" Background="Transparent" Foreground="White" FontSize="16" FontWeight="Bold" FontStyle="Normal"/>
+            <Rectangle x:Name="rectangle_save" Fill="#FF742F68" Width="89" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="276" Canvas.Top="15" MouseEnter="Rectangle_MouseEnter" MouseLeave="rectangle_save_MouseLeave" />
+            <Button x:Name="button_load" Content="Сохранить" Height="29" Canvas.Left="279" Canvas.Top="18" Width="83" Click="button_load_Click" Background="Transparent" Foreground="White" FontSize="16" FontWeight="Bold" FontStyle="Normal" MouseEnter="button_load_MouseEnter"/>
             <TextBox x:Name="choose_text" Canvas.Left="58" Canvas.Top="23" Text="Выберите дату" TextWrapping="Wrap" Width="161" Height="30" SelectionBrush="#000078D7" FontSize="16" FontWeight="Normal" FontStyle="Italic"/>
             <Border CornerRadius="5" Margin="0,0,-0.5,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="242">
                 <TextBox x:Name="slider_water" Text="{Binding ElementName=slider_water_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="243" Height="19" FontSize="10" Background="#FFE68EF5" Foreground="White" SelectionBrush="#000078D7" Margin="0,0,1,0" />
@@ -114,6 +114,14 @@
             <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="500">
                 <TextBox x:Name="slider_steps" Text="{Binding ElementName=slider_steps_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="474" Height="19" UndoLimit="111" Cursor="Hand" FontSize="10" Foreground="White" SelectionBrush="#000078D7" Background="#FFE68EF5" />
             </Border>
+            <CheckBox x:Name="check_box_1" Content="" Height="21" Canvas.Left="336" Canvas.Top="175" Width="26"/>
+            <CheckBox x:Name="check_box_2" Content="" Height="21" Canvas.Left="336" Canvas.Top="219" Width="26"/>
+            <CheckBox x:Name="check_box_3" Content="" Height="21" Canvas.Left="336" Canvas.Top="265" Width="26"/>
+            <CheckBox x:Name="check_box_4" Content="" Height="21" Canvas.Left="336" Canvas.Top="310" Width="26"/>
+            <CheckBox x:Name="check_box_5" Content="" Height="20" Canvas.Left="336" Canvas.Top="352" Width="26"/>
+            <CheckBox x:Name="check_box_6" Content="" Height="20" Canvas.Left="336" Canvas.Top="398" Width="26"/>
+            <CheckBox x:Name="check_box_7" Content="" Height="20" Canvas.Left="336" Canvas.Top="444" Width="26"/>
+            <Image x:Name="image_close_calendar" Height="30" Canvas.Left="557" Stretch="Fill" Source="Resources/close.png" Width="30" Canvas.Top="-1" Visibility="Hidden" MouseDown="image_close_calendar_MouseDown"/>
         </Canvas>
     </Grid>
 </Window>

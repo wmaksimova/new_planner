@@ -23,6 +23,7 @@ namespace planner4
         public string plan { get; set; }
         public int plan_position { get; set; }
         public int count_of_plan { get; set; }
+        public string check_plan { get; set; }
     }
     public class trackerModel
     {

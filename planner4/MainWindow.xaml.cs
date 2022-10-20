@@ -88,6 +88,12 @@ namespace planner4
             list_item_5.Visibility = Visibility.Hidden;
             list_item_6.Visibility = Visibility.Hidden;
             list_item_7.Visibility = Visibility.Hidden;
+            check_box_2.Visibility = Visibility.Hidden;
+            check_box_3.Visibility = Visibility.Hidden;
+            check_box_4.Visibility = Visibility.Hidden;
+            check_box_5.Visibility = Visibility.Hidden;
+            check_box_6.Visibility = Visibility.Hidden;
+            check_box_7.Visibility = Visibility.Hidden;
             StreamReader sr = new StreamReader("motivation.txt");
             string[] lines = sr.ReadToEnd().Split("\r\n");
             foreach (var item in lines)
@@ -98,6 +104,7 @@ namespace planner4
         }
         private void calendar_planner_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            image_close_calendar.Visibility = Visibility.Hidden;
             Random rnd = new Random();
             motivation_text.Visibility = Visibility;
             motivation_text.Text = listik[rnd.Next(1,listik.Count())];
@@ -111,13 +118,20 @@ namespace planner4
                 string TBText = "plan_" + i;
                 FindChild<TextBox>(Application.Current.MainWindow, TBText).Text = "";
             }
+            check_box_1.Visibility = Visibility;
+            check_box_1.IsChecked = false;
+            for (int i = 2; i <= 7; i++)
+            {
+                string TBCheck= "check_box_" + i;
+                FindChild<CheckBox>(Application.Current.MainWindow, TBCheck).IsChecked = false;
+                FindChild<CheckBox>(Application.Current.MainWindow, TBCheck).Visibility = Visibility.Hidden;
+            }
+            for (int i = 2; i <= 7; i++)
+            {
+                string TBList = "list_item_" + i;
+                FindChild<ListBoxItem>(Application.Current.MainWindow, TBList).Visibility = Visibility.Hidden;
+            }
             count_of_affairs.Text = "1";
-            list_item_2.Visibility = Visibility.Hidden;
-            list_item_3.Visibility = Visibility.Hidden;
-            list_item_4.Visibility = Visibility.Hidden;
-            list_item_5.Visibility = Visibility.Hidden;
-            list_item_6.Visibility = Visibility.Hidden;
-            list_item_7.Visibility = Visibility.Hidden;
             slider_water.Text = "0";
             slider_mood.Text = "0";
             slider_sleep.Text = "0";
@@ -138,9 +152,20 @@ namespace planner4
                     {
                         string TBText = "plan_" + item.plan_position;
                         string TBList = "list_item_" + item.plan_position;
+                        string TBCheck = "check_box_" + item.plan_position;
                         var TB = FindChild<TextBox>(Application.Current.MainWindow, TBText);
                         var listTB = FindChild<ListBoxItem>(Application.Current.MainWindow, TBList);
+                        var checkTB = FindChild<CheckBox>(Application.Current.MainWindow, TBCheck);
                         listTB.Visibility = Visibility;
+                        checkTB.Visibility = Visibility;
+                        if (item.check_plan == "True")
+                        {
+                            checkTB.IsChecked = true;
+                        }
+                        else
+                        {
+                            checkTB.IsChecked = false;
+                        }
                         TB.Text = item.plan;
                         count_of_affairs.Text = item.count_of_plan.ToString();
                     }
@@ -171,7 +196,11 @@ namespace planner4
                 n++;
                 ListBoxItem list = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
                 TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
+                text.Text = "";
                 list.Visibility = Visibility.Visible;
+                CheckBox checkbox = Application.Current.MainWindow.FindName("check_box_" + n) as CheckBox;
+                checkbox.Visibility = Visibility;
+                checkbox.IsChecked = false;
                 count_of_affairs.Text = n.ToString();
             }
         }
@@ -187,6 +216,9 @@ namespace planner4
             {
                 ListBoxItem list = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
                 TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
+                CheckBox checkbox = Application.Current.MainWindow.FindName("check_box_" + n) as CheckBox;
+                checkbox.Visibility = Visibility.Hidden;
+                checkbox.IsChecked = false;
                 list.Visibility = Visibility.Hidden;
                 n--;
                 count_of_affairs.Text = n.ToString();
@@ -200,6 +232,7 @@ namespace planner4
         {
             calendar_planner.Visibility = Visibility;
             date_text.Visibility = Visibility.Hidden;
+            image_close_calendar.Visibility = Visibility;
         }
         public Boolean isDataExist()
         {
@@ -229,11 +262,13 @@ namespace planner4
                 for (int i = 1; i <= 7; i++)
                 {
                     string TBText = "plan_" + i;
+                    string TBCheck = "check_box_" + i;
                     var text = FindChild<TextBox>(Application.Current.MainWindow, TBText).Text;
+                    var checkbox = FindChild<CheckBox>(Application.Current.MainWindow, TBCheck).IsChecked;
                     if (text.Length > 0)
                     {
                         countaff++;
-                        db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position = i, count_of_plan = countaff });
+                        db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position = i, count_of_plan = countaff, check_plan = checkbox.ToString() });
                     }
                 }
                 db.tracker.Add(new trackerModel
@@ -248,6 +283,31 @@ namespace planner4
             }
             MessageBox.Show("Данные сохранены");
         }
-        
+
+        private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
+        {
+            rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(67, 18, 59));
+        }
+
+        private void rectangle_save_MouseLeave(object sender, MouseEventArgs e)
+        {
+            rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(116, 47, 104));
+        }
+
+        private void button_load_MouseEnter(object sender, MouseEventArgs e)
+        {
+            rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(67, 18, 59));
+        }
+
+        private void button_load_MouseLeave(object sender, MouseEventArgs e)
+        {
+            rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(116, 47, 104));
+        }
+
+        private void image_close_calendar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            calendar_planner.Visibility = Visibility.Hidden;
+            image_close_calendar.Visibility = Visibility.Hidden;
+        }
     }
 }
