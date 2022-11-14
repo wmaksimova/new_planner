@@ -23,20 +23,9 @@ namespace planner4
     /// </summary>
     public partial class MainWindow : Window
     {
-       
-        /// <summary>
-        /// Finds a Child of a given item in the visual tree. 
-        /// </summary>
-        /// <param name="parent">A direct parent of the queried item.</param>
-        /// <typeparam name="T">The type of the queried item.</typeparam>
-        /// <param name="childName">x:Name or Name of child. </param>
-        /// <returns>The first parent item that matches the submitted type parameter. 
-        /// If not matching item can be found, 
-        /// a null parent is being returned.</returns>
         public static T FindChild<T>(DependencyObject parent, string childName)
            where T : DependencyObject
         {
-            // Confirm parent and childName are valid. 
             if (parent == null) return null;
 
             T foundChild = null;
@@ -45,30 +34,23 @@ namespace planner4
             for (int i = 0; i < childrenCount; i++)
             {
                 var child = VisualTreeHelper.GetChild(parent, i);
-                // If the child is not of the request child type child
                 T childType = child as T;
                 if (childType == null)
                 {
-                    // recursively drill down the tree
-                    foundChild = FindChild<T>(child, childName);
-
-                    // If the child is found, break so we do not overwrite the found child. 
+                    foundChild = FindChild<T>(child, childName); 
                     if (foundChild != null) break;
                 }
                 else if (!string.IsNullOrEmpty(childName))
                 {
                     var frameworkElement = child as FrameworkElement;
-                    // If the child's name is set for search
                     if (frameworkElement != null && frameworkElement.Name == childName)
                     {
-                        // if the child's name is of the request name
                         foundChild = (T)child;
                         break;
                     }
                 }
                 else
                 {
-                    // child element found.
                     foundChild = (T)child;
                     break;
                 }
@@ -80,8 +62,10 @@ namespace planner4
         public MainWindow()
         {
             InitializeComponent();
-            date_text.Visibility = Visibility.Hidden;
             choose_text.IsReadOnly = true;
+            choose_text.Visibility = Visibility;
+            choose_text.Text = "";
+            date_text.Visibility = Visibility.Hidden;
             list_item_2.Visibility = Visibility.Hidden;
             list_item_3.Visibility = Visibility.Hidden;
             list_item_4.Visibility = Visibility.Hidden;
@@ -230,6 +214,8 @@ namespace planner4
 
         private void button_calendar_Click(object sender, RoutedEventArgs e)
         {
+            choose_text.Text = "Выберите дату";
+            choose_text.Visibility = Visibility;
             calendar_planner.Visibility = Visibility;
             date_text.Visibility = Visibility.Hidden;
             image_close_calendar.Visibility = Visibility;
@@ -242,7 +228,7 @@ namespace planner4
         {
             if (isDataExist()) return;
             using (var db = new ConnectBD())
-            {
+            {                   
                 var selectedDate = (DateTime)calendar_planner.SelectedDate;
                 var day = db.days.FirstOrDefault(x => x.date == selectedDate);
                 int? dayIndex = day!=null ? day.id:null;
@@ -271,14 +257,14 @@ namespace planner4
                         db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position = i, count_of_plan = countaff, check_plan = checkbox.ToString() });
                     }
                 }
-                db.tracker.Add(new trackerModel
+                db.tracker.Add(new TrackerModel
                 {
                     rel_tracker_day_id = dayIndex.Value,
-                    water = int.Parse(slider_water.Text),
-                    mood = int.Parse(slider_mood.Text),
-                    sleep = int.Parse(slider_sleep.Text),
-                    steps = int.Parse(slider_steps.Text)
-                }); 
+                    water = int.Parse(slider_water_thumb.Value.ToString()),
+                    mood = int.Parse(slider_mood_thumb.Value.ToString()),
+                    sleep = int.Parse(slider_sleep_thumb.Value.ToString()),
+                    steps = int.Parse(slider_steps_thumb.Value.ToString())
+                });
                 db.SaveChanges();
             }
             MessageBox.Show("Данные сохранены");
@@ -306,8 +292,13 @@ namespace planner4
 
         private void image_close_calendar_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            choose_text.Visibility = Visibility.Hidden;
+            date_text.Visibility = Visibility;
+            DateTime data = (DateTime)calendar_planner.SelectedDate;
+            date_text.Text = data.ToLongDateString();
             calendar_planner.Visibility = Visibility.Hidden;
             image_close_calendar.Visibility = Visibility.Hidden;
         }
+        
     }
 }

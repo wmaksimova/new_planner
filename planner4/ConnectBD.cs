@@ -25,7 +25,7 @@ namespace planner4
         public int count_of_plan { get; set; }
         public string check_plan { get; set; }
     }
-    public class trackerModel
+    public class TrackerModel
     {
         [Key]
         public int rel_tracker_day_id { get; set; }
@@ -38,7 +38,7 @@ namespace planner4
     {
         public DbSet<dayModel> days { get; set; }
         public DbSet<planModel> plans { get; set; }
-        public DbSet<trackerModel> tracker { get; set; }
+        public DbSet<TrackerModel> tracker { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("workstation id=baseplaner.mssql.somee.com;packet size=4096;user id=xdashie_SQLLogin_1;pwd=juo9s5krmv;data source=baseplaner.mssql.somee.com;persist security info=False;initial catalog=baseplaner");
