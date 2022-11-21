@@ -88,8 +88,7 @@
             <TextBox Canvas.Left="37" Canvas.Top="586" Width="513" Height="34"/>
             <TextBox Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68"/>
             <TextBox x:Name="motivation_text" Height="38" Canvas.Left="247" Canvas.Top="586" Text="TextBox" TextWrapping="Wrap" Width="303" FontStyle="Italic" FontSize="14"/>
-            <!--<Button x:Name="Button_calendar" Width="30" Height="30" Canvas.Left="16" Canvas.Top="15" RenderTransformOrigin="0.5,0.5"
-                    Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Click="Button_calendar_Click" Panel.ZIndex="-2" ClickMode="Press"/>-->
+            
             <Image x:Name="calendar_image" Source="/img/calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
             <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000" Cursor="Hand"/>
             <Rectangle x:Name="rectangle_save" Fill="#FF742F68" Width="89" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="276" Canvas.Top="15" MouseEnter="Rectangle_MouseEnter" MouseLeave="rectangle_save_MouseLeave" />
