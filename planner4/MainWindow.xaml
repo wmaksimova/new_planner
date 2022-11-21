@@ -22,8 +22,7 @@
                     <GradientStop Color="#FF5961F9" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
-            <!--<Button x:Name="Button_calendar" Width="30" Height="30" Canvas.Left="16" Canvas.Top="15" RenderTransformOrigin="0.5,0.5"
-                    Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Click="Button_calendar_Click" Panel.ZIndex="-2" ClickMode="Press"/>-->
+            
             <Rectangle Fill="White" Width="244" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="15" />
             <TextBox x:Name="date_text" Canvas.Left="62" Canvas.Top="20" Width="180" Height="30"
                      Background="Transparent" SelectionBrush="Transparent" BorderBrush="Transparent" FontSize="20" Foreground="#FFE68EF5" IsReadOnlyCaretVisible="True" IsEnabled="False"/>
