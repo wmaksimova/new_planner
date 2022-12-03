@@ -168,8 +168,6 @@ namespace planner4
                 }
             }
         }
-
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             int n = int.Parse(count_of_affairs.Text);
@@ -190,7 +188,6 @@ namespace planner4
                 count_of_affairs.Text = n.ToString();
             }
         }
-
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             int n = int.Parse(count_of_affairs.Text);
@@ -211,8 +208,6 @@ namespace planner4
                 item.Visibility = Visibility.Hidden;
             }
         }
-
-
         private void button_calendar_Click(object sender, RoutedEventArgs e)
         {
             choose_text.Text = "Выберите дату";
@@ -220,10 +215,6 @@ namespace planner4
             calendar_planner.Visibility = Visibility;
             date_text.Visibility = Visibility.Hidden;
             image_close_calendar.Visibility = Visibility;
-        }
-        public Boolean isDataExist()
-        {
-            return false;
         }
         private void button_load_Click(object sender, RoutedEventArgs e)
         {
@@ -277,27 +268,22 @@ namespace planner4
                 MessageBox.Show("Данные сохранены");
             }
         }
-
         private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
         {
             rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(67, 18, 59));
         }
-
         private void rectangle_save_MouseLeave(object sender, MouseEventArgs e)
         {
             rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(116, 47, 104));
         }
-
         private void button_load_MouseEnter(object sender, MouseEventArgs e)
         {
             rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(67, 18, 59));
         }
-
         private void button_load_MouseLeave(object sender, MouseEventArgs e)
         {
             rectangle_save.Fill = new SolidColorBrush(Color.FromRgb(116, 47, 104));
         }
-
         private void image_close_calendar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             choose_text.Visibility = Visibility.Hidden;
@@ -315,7 +301,6 @@ namespace planner4
                 image_close_calendar.Visibility = Visibility.Hidden;
             }
         }
-
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("Инструкция по использованию ежедневника :" + "\n" +

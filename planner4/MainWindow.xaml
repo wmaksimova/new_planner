@@ -15,27 +15,26 @@
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
         <Canvas x:Name="canvas_planner" Grid.ColumnSpan="2" Margin="0,-1,0,1">
-
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFEE91F5" Offset="0"/>
                     <GradientStop Color="#FF5961F9" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
+            <!--#region  Календарь, выбор даты, инструкция-->
             <Rectangle Fill="White" Width="244" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="15" />
             <TextBox x:Name="date_text" Canvas.Left="62" Canvas.Top="20" Width="180" Height="30"
                      Background="Transparent" SelectionBrush="Transparent" BorderBrush="Transparent" FontSize="20" Foreground="#FFE68EF5" IsReadOnlyCaretVisible="True" IsEnabled="False"/>
             <Calendar x:Name="calendar_planner" Canvas.Left="383" Visibility="Hidden" SelectedDatesChanged="calendar_planner_SelectedDatesChanged"/>
-
-
-            <TextBox Canvas.Left="15" Canvas.Top="76" BorderBrush="#00000000" Background="Transparent" FontSize="18" TextWrapping="Wrap" Width="272" Foreground="White" SelectionBrush="#000078D7" FontWeight="Bold" Text="Сколько дел запланировано на сегодня?"/>
-            <Rectangle Fill="White" Width="56" Height="24" RadiusX="10" RadiusY="10" Canvas.Left="137" Canvas.Top="102" />
-            <TextBox x:Name="count_of_affairs" Grid.Column="0" Canvas.Left="159" Canvas.Top="104" Background="Transparent" FontSize="14" FontWeight="Bold" Text="1"/>
-
-            <Button FontSize="16" Click="Button_Click_1" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="175" Canvas.Top="104" Height="15" Width="15" Content="+" Cursor="Hand"/>
-            <Button FontSize="16" Click="Button_Click_2" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="144" Canvas.Top="102" Height="16" Content="-" Cursor="Hand"/>
-
-
+            <Image x:Name="calendar_image" Source="/img/calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
+            <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000" Cursor="Hand"/>
+            <Rectangle x:Name="rectangle_save" Fill="#FF742F68" Width="89" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="276" Canvas.Top="15" MouseEnter="Rectangle_MouseEnter" MouseLeave="rectangle_save_MouseLeave" />
+            <Button x:Name="button_load" Content="Сохранить" Height="29" Canvas.Left="279" Canvas.Top="18" Width="83" Click="button_load_Click" Background="Transparent" Foreground="White" FontSize="16" FontWeight="Bold" FontStyle="Normal" MouseEnter="button_load_MouseEnter" Cursor="Hand"/>
+            <TextBox x:Name="choose_text" Canvas.Left="75" Canvas.Top="20" Text="Выберите дату" TextWrapping="Wrap" Width="161" Height="30" SelectionBrush="#000078D7" FontSize="18" FontWeight="Normal" FontStyle="Italic" Foreground="#FFE68EF5"/>
+            <Image x:Name="image_close_calendar" Height="30" Canvas.Left="557" Stretch="Fill" Source="Resources/close.png" Width="30" Canvas.Top="-1" Visibility="Hidden" MouseDown="image_close_calendar_MouseDown"/>
+            <Image Height="18" Canvas.Left="587" Stretch="Fill" Source="Resources/instruction.png" Canvas.Top="5" Width="18" MouseDown="Image_MouseDown" RenderTransformOrigin="0.494,0.514"/>
+            <!--#endregion-->
+            <!--#region Задачи на день -->
             <ListBox x:Name="tools_for_day" Canvas.Left="10" Canvas.Top="162" Width="360" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent">
                 <ListBoxItem x:Name="list_item_1">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
@@ -73,6 +72,22 @@
                     </Border>
                 </ListBoxItem>
             </ListBox>
+            <CheckBox x:Name="check_box_1" Content="" Height="21" Canvas.Left="336" Canvas.Top="175" Width="26" Cursor="Hand"/>
+            <CheckBox x:Name="check_box_2" Content="" Height="21" Canvas.Left="336" Canvas.Top="219" Width="26" Cursor="Hand"/>
+            <CheckBox x:Name="check_box_3" Content="" Height="21" Canvas.Left="336" Canvas.Top="265" Width="26" Cursor="Hand"/>
+            <CheckBox x:Name="check_box_4" Content="" Height="21" Canvas.Left="336" Canvas.Top="310" Width="26" Cursor="Hand"/>
+            <CheckBox x:Name="check_box_5" Content="" Height="20" Canvas.Left="336" Canvas.Top="352" Width="26" Cursor="Hand"/>
+            <CheckBox x:Name="check_box_6" Content="" Height="20" Canvas.Left="336" Canvas.Top="398" Width="26" Cursor="Hand"/>
+            <CheckBox x:Name="check_box_7" Content="" Height="20" Canvas.Left="336" Canvas.Top="444" Width="26" Cursor="Hand"/>
+
+            <TextBox Canvas.Left="15" Canvas.Top="76" BorderBrush="#00000000" Background="Transparent" FontSize="18" TextWrapping="Wrap" Width="272" Foreground="White" SelectionBrush="#000078D7" FontWeight="Bold" Text="Сколько дел запланировано на сегодня?"/>
+            <Rectangle Fill="White" Width="56" Height="24" RadiusX="10" RadiusY="10" Canvas.Left="137" Canvas.Top="102" />
+            <TextBox x:Name="count_of_affairs" Grid.Column="0" Canvas.Left="159" Canvas.Top="104" Background="Transparent" FontSize="14" FontWeight="Bold" Text="1"/>
+
+            <Button FontSize="16" Click="Button_Click_1" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="175" Canvas.Top="104" Height="15" Width="15" Content="+" Cursor="Hand"/>
+            <Button FontSize="16" Click="Button_Click_2" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="144" Canvas.Top="102" Height="16" Content="-" Cursor="Hand"/>
+            <!--#endregion-->
+            <!--#region Трекеры -->
             <Rectangle Fill="#FF742F68" Width="214" Height="343" RadiusX="15" RadiusY="15" Canvas.Left="376" Canvas.Top="201" />
             <Rectangle Fill="White" Width="171" Height="25" RadiusX="15" RadiusY="15" Canvas.Left="390" Canvas.Top="206" />
             <Rectangle Fill="White" Width="172" Height="25" RadiusX="15" RadiusY="15" Canvas.Left="390" Canvas.Top="293" />
@@ -83,17 +98,6 @@
             <TextBox x:Name="mood_text" Height="21" Canvas.Left="423" TextWrapping="Wrap" Text="Настроение" Canvas.Top="293" Width="104" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
             <TextBox x:Name="sleep_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Сон" Canvas.Top="379" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
             <TextBox x:Name="steps_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Шаги" Canvas.Top="465" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
-            <Rectangle Fill="#FFE68EF5" Width="575" Height="80" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="564" />
-            <Rectangle Fill="white" Width="557" Height="56" RadiusX="15" RadiusY="15" Canvas.Left="23" Canvas.Top="575" />
-            <TextBox Canvas.Left="37" Canvas.Top="586" Width="513" Height="34"/>
-            <TextBox Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68" IsReadOnlyCaretVisible="True"/>
-            <!--  -->
-
-            <Image x:Name="calendar_image" Source="/img/calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
-            <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000" Cursor="Hand"/>
-            <Rectangle x:Name="rectangle_save" Fill="#FF742F68" Width="89" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="276" Canvas.Top="15" MouseEnter="Rectangle_MouseEnter" MouseLeave="rectangle_save_MouseLeave" />
-            <Button x:Name="button_load" Content="Сохранить" Height="29" Canvas.Left="279" Canvas.Top="18" Width="83" Click="button_load_Click" Background="Transparent" Foreground="White" FontSize="16" FontWeight="Bold" FontStyle="Normal" MouseEnter="button_load_MouseEnter" Cursor="Hand"/>
-            <TextBox x:Name="choose_text" Canvas.Left="75" Canvas.Top="20" Text="Выберите дату" TextWrapping="Wrap" Width="161" Height="30" SelectionBrush="#000078D7" FontSize="18" FontWeight="Normal" FontStyle="Italic" Foreground="#FFE68EF5"/>
             <Border CornerRadius="5" Margin="0,0,-0.5,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="242">
                 <TextBox x:Name="slider_water" Text="{Binding ElementName=slider_water_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="243" Height="19" FontSize="10" Background="#FFE68EF5" Foreground="White" SelectionBrush="#000078D7" Margin="0,0,1,0" />
             </Border>
@@ -111,17 +115,15 @@
             <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="500">
                 <TextBox x:Name="slider_steps" Text="{Binding ElementName=slider_steps_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="474" Height="19" UndoLimit="111" Cursor="Hand" FontSize="10" Foreground="White" SelectionBrush="#000078D7" Background="#FFE68EF5" />
             </Border>
-            <CheckBox x:Name="check_box_1" Content="" Height="21" Canvas.Left="336" Canvas.Top="175" Width="26" Cursor="Hand"/>
-            <CheckBox x:Name="check_box_2" Content="" Height="21" Canvas.Left="336" Canvas.Top="219" Width="26" Cursor="Hand"/>
-            <CheckBox x:Name="check_box_3" Content="" Height="21" Canvas.Left="336" Canvas.Top="265" Width="26" Cursor="Hand"/>
-            <CheckBox x:Name="check_box_4" Content="" Height="21" Canvas.Left="336" Canvas.Top="310" Width="26" Cursor="Hand"/>
-            <CheckBox x:Name="check_box_5" Content="" Height="20" Canvas.Left="336" Canvas.Top="352" Width="26" Cursor="Hand"/>
-            <CheckBox x:Name="check_box_6" Content="" Height="20" Canvas.Left="336" Canvas.Top="398" Width="26" Cursor="Hand"/>
-            <CheckBox x:Name="check_box_7" Content="" Height="20" Canvas.Left="336" Canvas.Top="444" Width="26" Cursor="Hand"/>
-            <Image x:Name="image_close_calendar" Height="30" Canvas.Left="557" Stretch="Fill" Source="Resources/close.png" Width="30" Canvas.Top="-1" Visibility="Hidden" MouseDown="image_close_calendar_MouseDown"/>
-            <Viewbox Height="34" Canvas.Left="247" Canvas.Top="586" Width="314" />
+            <!--#endregion-->
+            <!--#region  Мотивация-->
+            <Rectangle Fill="#FFE68EF5" Width="575" Height="80" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="564" />
+            <Rectangle Fill="white" Width="557" Height="56" RadiusX="15" RadiusY="15" Canvas.Left="23" Canvas.Top="575" />
+            <TextBox Canvas.Left="37" Canvas.Top="586" Width="513" Height="34"/>
+            <TextBox Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68" IsReadOnlyCaretVisible="True"/>
             <TextBox x:Name="motivation_text"  Height="38" Canvas.Left="247" Canvas.Top="586" Text="TextBox" TextWrapping="Wrap" Width="303" FontStyle="Italic" FontSize="14" IsEnabled="False"/>
-            <Image Height="18" Canvas.Left="587" Stretch="Fill" Source="Resources/instruction.png" Canvas.Top="5" Width="18" MouseDown="Image_MouseDown" RenderTransformOrigin="0.494,0.514"/>
+            <Viewbox Height="34" Canvas.Left="247" Canvas.Top="586" Width="314" />
+            <!--#endregion-->
         </Canvas>
     </Grid>
 </Window>
