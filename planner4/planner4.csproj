@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="close.png" />
     <None Remove="img\calendar-iconpng.png" />
+    <None Remove="instruction.png" />
     <None Remove="Resources\close.png" />
     <None Remove="Resources\close.svg" />
     <None Remove="Resources\instruction.png" />
+    <None Remove="Resources\motivation.txt" />
     <None Remove="Resources\water.png" />
   </ItemGroup>
 
@@ -24,11 +27,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\calendar-iconpng.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="img\water.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="instruction.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\close.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -37,6 +46,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\instruction.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\motivation.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

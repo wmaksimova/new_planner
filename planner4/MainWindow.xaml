@@ -98,22 +98,22 @@
             <TextBox x:Name="mood_text" Height="21" Canvas.Left="423" TextWrapping="Wrap" Text="Настроение" Canvas.Top="293" Width="104" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
             <TextBox x:Name="sleep_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Сон" Canvas.Top="379" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
             <TextBox x:Name="steps_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Шаги" Canvas.Top="465" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
-            <Border CornerRadius="5" Margin="0,0,-0.5,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="242">
+            <Border CornerRadius="5" Margin="0,0,-0.5,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="242">
                 <TextBox x:Name="slider_water" Text="{Binding ElementName=slider_water_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="243" Height="19" FontSize="10" Background="#FFE68EF5" Foreground="White" SelectionBrush="#000078D7" Margin="0,0,1,0" />
             </Border>
             <Slider x:Name="slider_water_thumb" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="247" Cursor="Hand"/>
 
             <Slider x:Name="slider_mood_thumb" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="334" Cursor="Hand"/>
-            <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="334">
+            <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="334">
                 <TextBox x:Name="slider_mood" Text="{Binding ElementName=slider_mood_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="318" Height="18" FontSize="10" SelectionBrush="#00C382C3" Background="#FFE68EF5" Foreground="White" />
             </Border>
             <Slider x:Name="slider_sleep_thumb" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="421" Cursor="Hand"/>
-            <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="421">
+            <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="421">
                 <TextBox x:Name="slider_sleep" Text="{Binding ElementName=slider_sleep_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="396" Height="19" FontSize="10" SelectionBrush="#00C382C3" Background="#FFE68EF5" Foreground="White" />
             </Border>
             <Slider x:Name="slider_steps_thumb" Maximum="10000" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="158" Canvas.Left="392" Canvas.Top="501" TickFrequency="500" Cursor="Hand"/>
-            <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="548" Canvas.Top="500">
-                <TextBox x:Name="slider_steps" Text="{Binding ElementName=slider_steps_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="474" Height="19" UndoLimit="111" Cursor="Hand" FontSize="10" Foreground="White" SelectionBrush="#000078D7" Background="#FFE68EF5" />
+            <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="501">
+                <TextBox x:Name="slider_steps" Text="{Binding ElementName=slider_steps_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="474" Height="19" UndoLimit="111" Cursor="Hand" FontSize="9" Foreground="White" SelectionBrush="#000078D7" Background="#FFE68EF5" />
             </Border>
             <!--#endregion-->
             <!--#region  Мотивация-->

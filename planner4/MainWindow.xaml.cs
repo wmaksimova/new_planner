@@ -122,18 +122,20 @@ namespace planner4
             slider_mood.Text = "0";
             slider_sleep.Text = "0";
             slider_steps.Text = "0";
-            using (var db = new ConnectBD())
+            try
             {
-                var selectedDate = data;
-                var day = db.days.FirstOrDefault(x => x.date == selectedDate);
-                int? dayIndex = day != null ? day.id : null; //записан ли такой день, если нет, то записывем именно дату и сохраняем
-                if (!dayIndex.HasValue)
+                using (var db = new ConnectBD())
                 {
-                    var selectedDay = new dayModel { date = data };
-                    db.days.Add(selectedDay);
-                    db.SaveChanges();
-                    dayIndex = selectedDay.id;
-                }
+                    var selectedDate = data;
+                    var day = db.days.FirstOrDefault(x => x.date == selectedDate);
+                    int? dayIndex = day != null ? day.id : null; //записан ли такой день, если нет, то записывем именно дату и сохраняем
+                    if (!dayIndex.HasValue)
+                    {
+                        var selectedDay = new dayModel { date = data };
+                        db.days.Add(selectedDay);
+                        db.SaveChanges();
+                        dayIndex = selectedDay.id;
+                    }
                     foreach (var item in db.plans.Where(x => x.rel_day_id == dayIndex))//ищем план и записываем его
                     {
                         string TBText = "plan_" + item.plan_position;
@@ -155,17 +157,23 @@ namespace planner4
                         TB.Text = item.plan;
                         count_of_affairs.Text = item.count_of_plan.ToString();
                     }
-                foreach (var track in db.tracker.Where(x => x.rel_tracker_day_id == dayIndex))
-                {
-                    slider_water_thumb.Value = track.water;
-                    slider_mood_thumb.Value = track.mood;
-                    slider_sleep_thumb.Value = track.sleep;
-                    slider_steps_thumb.Value = track.steps;
-                    slider_water.Text = track.water.ToString();
-                    slider_mood.Text = track.mood.ToString();
-                    slider_sleep.Text = track.sleep.ToString();
-                    slider_steps.Text = track.steps.ToString();
+                    foreach (var track in db.tracker.Where(x => x.rel_tracker_day_id == dayIndex))
+                    {
+                        slider_water_thumb.Value = track.water;
+                        slider_mood_thumb.Value = track.mood;
+                        slider_sleep_thumb.Value = track.sleep;
+                        slider_steps_thumb.Value = track.steps;
+                        slider_water.Text = track.water.ToString();
+                        slider_mood.Text = track.mood.ToString();
+                        slider_sleep.Text = track.sleep.ToString();
+                        slider_steps.Text = track.steps.ToString();
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ошибка при подключении к базе данных. Проверьте подключение к интернету и попробуйте еще раз. Или перезагрузите программу.");
+                Logger.WriteLine("Ошибка при подключении к базе данных");
             }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
