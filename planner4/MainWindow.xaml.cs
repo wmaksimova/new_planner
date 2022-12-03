@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,13 +15,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace planner4
 {
-    
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public static T FindChild<T>(DependencyObject parent, string childName)
@@ -65,6 +63,10 @@ namespace planner4
             choose_text.IsReadOnly = true;
             choose_text.Visibility = Visibility;
             choose_text.Text = "";
+            water_text.IsReadOnly = true;
+            mood_text.IsReadOnly = true;
+            sleep_text.IsReadOnly = true;
+            steps_text.IsReadOnly = true;
             date_text.Visibility = Visibility.Hidden;
             list_item_2.Visibility = Visibility.Hidden;
             list_item_3.Visibility = Visibility.Hidden;
@@ -194,12 +196,11 @@ namespace planner4
             int n = int.Parse(count_of_affairs.Text);
             if (n == 1)
             {
-                MessageBox.Show("Ты чего дурак какие 0 дел иди работай");
+                MessageBox.Show("Нельзя записать меньше 0 дел на день");
             }
             else
             {
                 ListBoxItem list = Application.Current.MainWindow.FindName("list_item_" + n) as ListBoxItem;
-                TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
                 CheckBox checkbox = Application.Current.MainWindow.FindName("check_box_" + n) as CheckBox;
                 checkbox.Visibility = Visibility.Hidden;
                 checkbox.IsChecked = false;
@@ -226,48 +227,55 @@ namespace planner4
         }
         private void button_load_Click(object sender, RoutedEventArgs e)
         {
-            if (isDataExist()) return;
-            using (var db = new ConnectBD())
-            {                   
-                var selectedDate = (DateTime)calendar_planner.SelectedDate;
-                var day = db.days.FirstOrDefault(x => x.date == selectedDate);
-                int? dayIndex = day!=null ? day.id:null;
-                if (!dayIndex.HasValue)
-                {
-                    var selectedDay = new dayModel { date = selectedDate };
-                    db.days.Add(selectedDay);
-                    db.SaveChanges();
-                    dayIndex = selectedDay.id;
-                }
-                else
-                {
-                    db.plans.RemoveRange(db.plans.Where(x => x.rel_day_id == dayIndex));
-                    db.SaveChanges();
-                }
-                int countaff = 0;
-                for (int i = 1; i <= 7; i++)
-                {
-                    string TBText = "plan_" + i;
-                    string TBCheck = "check_box_" + i;
-                    var text = FindChild<TextBox>(Application.Current.MainWindow, TBText).Text;
-                    var checkbox = FindChild<CheckBox>(Application.Current.MainWindow, TBCheck).IsChecked;
-                    if (text.Length > 0)
-                    {
-                        countaff++;
-                        db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position = i, count_of_plan = countaff, check_plan = checkbox.ToString() });
-                    }
-                }
-                db.tracker.Add(new TrackerModel
-                {
-                    rel_tracker_day_id = dayIndex.Value,
-                    water = int.Parse(slider_water_thumb.Value.ToString()),
-                    mood = int.Parse(slider_mood_thumb.Value.ToString()),
-                    sleep = int.Parse(slider_sleep_thumb.Value.ToString()),
-                    steps = int.Parse(slider_steps_thumb.Value.ToString())
-                });
-                db.SaveChanges();
+            if (calendar_planner.SelectedDate == null)
+            {
+                MessageBox.Show("Сначала выберите дату");
+                Logger.WriteLine("Ошибка: не выбрана дата перед сохранением данных");
             }
-            MessageBox.Show("Данные сохранены");
+            else
+            {
+                using (var db = new ConnectBD())
+                {
+                    var selectedDate = (DateTime)calendar_planner.SelectedDate;
+                    var day = db.days.FirstOrDefault(x => x.date == selectedDate);
+                    int? dayIndex = day != null ? day.id : null;
+                    if (!dayIndex.HasValue)
+                    {
+                        var selectedDay = new dayModel { date = selectedDate };
+                        db.days.Add(selectedDay);
+                        db.SaveChanges();
+                        dayIndex = selectedDay.id;
+                    }
+                    else
+                    {
+                        db.plans.RemoveRange(db.plans.Where(x => x.rel_day_id == dayIndex));
+                        db.SaveChanges();
+                    }
+                    int countaff = 0;
+                    for (int i = 1; i <= 7; i++)
+                    {
+                        string TBText = "plan_" + i;
+                        string TBCheck = "check_box_" + i;
+                        var text = FindChild<TextBox>(Application.Current.MainWindow, TBText).Text;
+                        var checkbox = FindChild<CheckBox>(Application.Current.MainWindow, TBCheck).IsChecked;
+                        if (text.Length > 0)
+                        {
+                            countaff++;
+                            db.plans.Add(new planModel { plan = text, rel_day_id = dayIndex.Value, plan_position = i, count_of_plan = countaff, check_plan = checkbox.ToString() });
+                        }
+                    }
+                    db.tracker.Add(new TrackerModel
+                    {
+                        rel_tracker_day_id = dayIndex.Value,
+                        water = int.Parse(slider_water_thumb.Value.ToString()),
+                        mood = int.Parse(slider_mood_thumb.Value.ToString()),
+                        sleep = int.Parse(slider_sleep_thumb.Value.ToString()),
+                        steps = int.Parse(slider_steps_thumb.Value.ToString())
+                    });
+                    db.SaveChanges();
+                }
+                MessageBox.Show("Данные сохранены");
+            }
         }
 
         private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
@@ -294,11 +302,44 @@ namespace planner4
         {
             choose_text.Visibility = Visibility.Hidden;
             date_text.Visibility = Visibility;
-            DateTime data = (DateTime)calendar_planner.SelectedDate;
-            date_text.Text = data.ToLongDateString();
-            calendar_planner.Visibility = Visibility.Hidden;
-            image_close_calendar.Visibility = Visibility.Hidden;
+            if (calendar_planner.SelectedDate == null)
+            {
+                MessageBox.Show("Сначала выберите дату"); Logger.WriteLine("Не выбрана дата" +
+                "при закрытии календаря");
+                choose_text.Visibility = Visibility;
+            }
+            else {
+                DateTime data = (DateTime)calendar_planner.SelectedDate;
+                date_text.Text = data.ToLongDateString();
+                calendar_planner.Visibility = Visibility.Hidden;
+                image_close_calendar.Visibility = Visibility.Hidden;
+            }
         }
-        
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Инструкция по использованию ежедневника :" + "\n" +
+                "1.Чтобы выбрать дату, нажмите на календарь в левом верхнем углу" + "\n" +
+                "2.Ввести значения для трекеров вы можете как и вручную, так и с помощью слайдера" + "\n" +
+                "3.Максимальное значение для трекреов:" + "\n" +
+                "Трекер воды - от 0 до 10(измеряется в стаканах по 200 мл)" + "\n" +
+                "Трекер настроения - от 0 до 10(0 - ужасно, 10 - отлично)" + "\n" +
+                "Трекер сна - от 0 до 10(0 - ужасно, 10 - отлично)" + "\n" +
+                "Трекер шагов - от 0 до 10 000" + "\n" +
+                "4.Чтобы сохранить данные, нужно обязательно нажать на кнопку 'Сохранить'(при обновлении данных соответственно)");
+        }
+    }
+    static class Logger
+    {
+        //---------------------------------------------------------
+        // Статический метод записи строки в файл лога с переносом
+        //---------------------------------------------------------
+        public static void WriteLine(string message)
+        {
+            using (StreamWriter sw = new StreamWriter(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\log.txt", true))
+            {
+                sw.WriteLine(String.Format("{0,-23} {1}", DateTime.Now.ToString() + ":", message));
+            }
+        }
     }
 }

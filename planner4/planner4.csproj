@@ -10,6 +10,7 @@
     <None Remove="img\calendar-iconpng.png" />
     <None Remove="Resources\close.png" />
     <None Remove="Resources\close.svg" />
+    <None Remove="Resources\instruction.png" />
     <None Remove="Resources\water.png" />
   </ItemGroup>
 
@@ -33,6 +34,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\close.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\instruction.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -79,16 +79,16 @@
             <Rectangle Fill="White" Width="171" Height="25" RadiusX="15" RadiusY="15" Canvas.Left="390" Canvas.Top="379" />
             <Rectangle Fill="White" Width="171" Height="25" RadiusX="15" RadiusY="15" Canvas.Left="395" Canvas.Top="464" />
             <Label Content="Трекеры" Canvas.Left="417" Canvas.Top="154" FontSize="24" FontWeight="Bold" Background="#00000000" Foreground="White"/>
-            <TextBox Height="21" Canvas.Left="449" TextWrapping="Wrap" Text="Вода" Canvas.Top="206" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold"/>
-            <TextBox Height="21" Canvas.Left="423" TextWrapping="Wrap" Text="Настроение" Canvas.Top="293" Width="104" Foreground="#FF742F68" FontSize="16" FontWeight="Bold"/>
-            <TextBox Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Сон" Canvas.Top="379" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold"/>
-            <TextBox Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Шаги" Canvas.Top="465" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold"/>
+            <TextBox x:Name="water_text" Height="21" Canvas.Left="449" TextWrapping="Wrap" Text="Вода" Canvas.Top="206" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
+            <TextBox x:Name="mood_text" Height="21" Canvas.Left="423" TextWrapping="Wrap" Text="Настроение" Canvas.Top="293" Width="104" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
+            <TextBox x:Name="sleep_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Сон" Canvas.Top="379" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
+            <TextBox x:Name="steps_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Шаги" Canvas.Top="465" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
             <Rectangle Fill="#FFE68EF5" Width="575" Height="80" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="564" />
             <Rectangle Fill="white" Width="557" Height="56" RadiusX="15" RadiusY="15" Canvas.Left="23" Canvas.Top="575" />
             <TextBox Canvas.Left="37" Canvas.Top="586" Width="513" Height="34"/>
-            <TextBox Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68"/>
-            <TextBox x:Name="motivation_text" Height="38" Canvas.Left="247" Canvas.Top="586" Text="TextBox" TextWrapping="Wrap" Width="303" FontStyle="Italic" FontSize="14"/>
-            
+            <TextBox Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68" IsReadOnlyCaretVisible="True"/>
+            <!--  -->
+
             <Image x:Name="calendar_image" Source="/img/calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
             <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000" Cursor="Hand"/>
             <Rectangle x:Name="rectangle_save" Fill="#FF742F68" Width="89" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="276" Canvas.Top="15" MouseEnter="Rectangle_MouseEnter" MouseLeave="rectangle_save_MouseLeave" />
@@ -119,6 +119,9 @@
             <CheckBox x:Name="check_box_6" Content="" Height="20" Canvas.Left="336" Canvas.Top="398" Width="26" Cursor="Hand"/>
             <CheckBox x:Name="check_box_7" Content="" Height="20" Canvas.Left="336" Canvas.Top="444" Width="26" Cursor="Hand"/>
             <Image x:Name="image_close_calendar" Height="30" Canvas.Left="557" Stretch="Fill" Source="Resources/close.png" Width="30" Canvas.Top="-1" Visibility="Hidden" MouseDown="image_close_calendar_MouseDown"/>
+            <Viewbox Height="34" Canvas.Left="247" Canvas.Top="586" Width="314" />
+            <TextBox x:Name="motivation_text"  Height="38" Canvas.Left="247" Canvas.Top="586" Text="TextBox" TextWrapping="Wrap" Width="303" FontStyle="Italic" FontSize="14" IsEnabled="False"/>
+            <Image Height="18" Canvas.Left="587" Stretch="Fill" Source="Resources/instruction.png" Canvas.Top="5" Width="18" MouseDown="Image_MouseDown" RenderTransformOrigin="0.494,0.514"/>
         </Canvas>
     </Grid>
 </Window>
