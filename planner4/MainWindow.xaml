@@ -25,7 +25,7 @@
             <Rectangle Fill="White" Width="244" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="15" />
             <TextBox x:Name="date_text" Canvas.Left="62" Canvas.Top="20" Width="180" Height="30"
                      Background="Transparent" SelectionBrush="Transparent" BorderBrush="Transparent" FontSize="20" Foreground="#FFE68EF5" IsReadOnlyCaretVisible="True" IsEnabled="False"/>
-            <Calendar x:Name="calendar_planner" Canvas.Left="383" Visibility="Hidden" SelectedDatesChanged="calendar_planner_SelectedDatesChanged"/>
+            <Calendar x:Name="calendar_planner" Canvas.Left="383" Visibility="Hidden" SelectedDatesChanged="calendar_planner_SelectedDatesChanged" DisplayDateStart="2015-01-01" DisplayDateEnd="2030-01-01"/>
             <Image x:Name="calendar_image" Source="/img/calendar-iconpng.png" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20"/>
             <Button x:Name="button_calendar" Width="30" Height="30" Canvas.Left="23" Canvas.Top="20" Click="button_calendar_Click" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#00000000" Cursor="Hand"/>
             <Rectangle x:Name="rectangle_save" Fill="#FF742F68" Width="89" Height="39" RadiusX="15" RadiusY="15" Canvas.Left="276" Canvas.Top="15" MouseEnter="Rectangle_MouseEnter" MouseLeave="rectangle_save_MouseLeave" />
@@ -38,37 +38,37 @@
             <ListBox x:Name="tools_for_day" Canvas.Left="10" Canvas.Top="162" Width="360" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent">
                 <ListBoxItem x:Name="list_item_1">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_1" Cursor="Pen"/>
+                        <TextBox x:Name="plan_1" Cursor="Pen" MaxLength="25" FontSize="14"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem x:Name="list_item_2">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_2" Cursor="Pen"/>
+                        <TextBox x:Name="plan_2" Cursor="Pen" MaxLength="25" FontSize="14"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem x:Name="list_item_3">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_3" Cursor="Pen"/>
+                        <TextBox x:Name="plan_3" Cursor="Pen" MaxLength="25" FontSize="14"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem x:Name="list_item_4">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_4" Cursor="Pen"/>
+                        <TextBox x:Name="plan_4" Cursor="Pen" MaxLength="25" FontSize="14"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem x:Name="list_item_5">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_5" Cursor="Pen"/>
+                        <TextBox x:Name="plan_5" Cursor="Pen" MaxLength="25" FontSize="14"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem x:Name="list_item_6">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_6" Cursor="Pen"/>
+                        <TextBox x:Name="plan_6" Cursor="Pen" MaxLength="25" FontSize="14"/>
                     </Border>
                 </ListBoxItem>
                 <ListBoxItem x:Name="list_item_7">
                     <Border CornerRadius="5" Margin="0,0,0,10" Padding="5" Background="White">
-                        <TextBox x:Name="plan_7" Cursor="Pen"/>
+                        <TextBox x:Name="plan_7" Cursor="Pen" MaxLength="25" FontSize="14"/>
                     </Border>
                 </ListBoxItem>
             </ListBox>
@@ -80,9 +80,9 @@
             <CheckBox x:Name="check_box_6" Content="" Height="20" Canvas.Left="336" Canvas.Top="398" Width="26" Cursor="Hand"/>
             <CheckBox x:Name="check_box_7" Content="" Height="20" Canvas.Left="336" Canvas.Top="444" Width="26" Cursor="Hand"/>
 
-            <TextBox Canvas.Left="15" Canvas.Top="76" BorderBrush="#00000000" Background="Transparent" FontSize="18" TextWrapping="Wrap" Width="272" Foreground="White" SelectionBrush="#000078D7" FontWeight="Bold" Text="Сколько дел запланировано на сегодня?"/>
+            <TextBox x:Name="text_count_of_offairs" Canvas.Left="15" Canvas.Top="76" BorderBrush="#00000000" Background="Transparent" FontSize="18" TextWrapping="Wrap" Width="272" Foreground="White" SelectionBrush="#000078D7" FontWeight="Bold" Text="Сколько дел запланировано на сегодня?"/>
             <Rectangle Fill="White" Width="56" Height="24" RadiusX="10" RadiusY="10" Canvas.Left="137" Canvas.Top="102" />
-            <TextBox x:Name="count_of_affairs" Grid.Column="0" Canvas.Left="159" Canvas.Top="104" Background="Transparent" FontSize="14" FontWeight="Bold" Text="1"/>
+            <TextBox x:Name="count_of_affairs" Grid.Column="0" Canvas.Left="159" Canvas.Top="104" Background="Transparent" FontSize="14" FontWeight="Bold" Text="1" Cursor="Arrow"/>
 
             <Button FontSize="16" Click="Button_Click_1" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="175" Canvas.Top="104" Height="15" Width="15" Content="+" Cursor="Hand"/>
             <Button FontSize="16" Click="Button_Click_2" Background="Transparent" Foreground="#FF742F68" FontWeight="Bold" FontFamily="Wide Latin" Canvas.Left="144" Canvas.Top="102" Height="16" Content="-" Cursor="Hand"/>
@@ -94,33 +94,32 @@
             <Rectangle Fill="White" Width="171" Height="25" RadiusX="15" RadiusY="15" Canvas.Left="390" Canvas.Top="379" />
             <Rectangle Fill="White" Width="171" Height="25" RadiusX="15" RadiusY="15" Canvas.Left="395" Canvas.Top="464" />
             <Label Content="Трекеры" Canvas.Left="417" Canvas.Top="154" FontSize="24" FontWeight="Bold" Background="#00000000" Foreground="White"/>
-            <TextBox x:Name="water_text" Height="21" Canvas.Left="449" TextWrapping="Wrap" Text="Вода" Canvas.Top="206" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
-            <TextBox x:Name="mood_text" Height="21" Canvas.Left="423" TextWrapping="Wrap" Text="Настроение" Canvas.Top="293" Width="104" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
-            <TextBox x:Name="sleep_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Сон" Canvas.Top="379" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
-            <TextBox x:Name="steps_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Шаги" Canvas.Top="465" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True"/>
+            <TextBox x:Name="water_text" Height="21" Canvas.Left="449" TextWrapping="Wrap" Text="Вода" Canvas.Top="206" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True" Cursor="Arrow"/>
+            <TextBox x:Name="mood_text" Height="21" Canvas.Left="423" TextWrapping="Wrap" Text="Настроение" Canvas.Top="293" Width="104" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True" Cursor="Arrow"/>
+            <TextBox x:Name="sleep_text" Height="21" Canvas.Left="452" TextWrapping="Wrap" Text="Сон" Canvas.Top="379" Width="48" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True" Cursor="Arrow"/>
+            <TextBox x:Name="steps_text" Height="21" Canvas.Left="451" TextWrapping="Wrap" Text="Шаги" Canvas.Top="465" Width="47" Foreground="#FF742F68" FontSize="16" FontWeight="Bold" IsReadOnlyCaretVisible="True" Cursor="Arrow"/>
             <Border CornerRadius="5" Margin="0,0,-0.5,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="242">
-                <TextBox x:Name="slider_water" Text="{Binding ElementName=slider_water_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="243" Height="19" FontSize="10" Background="#FFE68EF5" Foreground="White" SelectionBrush="#000078D7" Margin="0,0,1,0" />
+                <TextBox x:Name="slider_water" Text="{Binding ElementName=slider_water_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="243" Height="19" FontSize="10" Background="#FFE68EF5" Foreground="White" SelectionBrush="#000078D7" Margin="0,0,1,0" TextChanged="slider_water_TextChanged" MaxLength="2" LostFocus="slider_water_LostFocus" />
             </Border>
-            <Slider x:Name="slider_water_thumb" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="247" Cursor="Hand"/>
+            <Slider x:Name="slider_water_thumb" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="247" Cursor="Hand" Value="0"/>
 
-            <Slider x:Name="slider_mood_thumb" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="334" Cursor="Hand"/>
+            <Slider x:Name="slider_mood_thumb" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="334" Cursor="Hand" Value="0"/>
             <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="334">
-                <TextBox x:Name="slider_mood" Text="{Binding ElementName=slider_mood_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="318" Height="18" FontSize="10" SelectionBrush="#00C382C3" Background="#FFE68EF5" Foreground="White" />
+                <TextBox x:Name="slider_mood" Text="{Binding ElementName=slider_mood_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="318" Height="18" FontSize="10" SelectionBrush="#00C382C3" Background="#FFE68EF5" Foreground="White" TextChanged="slider_mood_TextChanged" MaxLength="2" LostFocus="slider_mood_LostFocus"/>
             </Border>
-            <Slider x:Name="slider_sleep_thumb" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="421" Cursor="Hand"/>
+            <Slider x:Name="slider_sleep_thumb" Maximum="10" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="160" Canvas.Left="390" Canvas.Top="421" Cursor="Hand" Value="0"/>
             <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="421">
-                <TextBox x:Name="slider_sleep" Text="{Binding ElementName=slider_sleep_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="396" Height="19" FontSize="10" SelectionBrush="#00C382C3" Background="#FFE68EF5" Foreground="White" />
+                <TextBox x:Name="slider_sleep" Text="{Binding ElementName=slider_sleep_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="396" Height="19" FontSize="10" SelectionBrush="#00C382C3" Background="#FFE68EF5" Foreground="White" TextChanged="slider_sleep_TextChanged" MaxLength="2" LostFocus="slider_sleep_LostFocus" />
             </Border>
-            <Slider x:Name="slider_steps_thumb" Maximum="10000" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="158" Canvas.Left="392" Canvas.Top="501" TickFrequency="500" Cursor="Hand"/>
+            <Slider x:Name="slider_steps_thumb" Maximum="10000" TickPlacement="BottomRight" IsSnapToTickEnabled="True" Width="158" Canvas.Left="392" Canvas.Top="501" TickFrequency="500" Cursor="Hand" Value="0"/>
             <Border CornerRadius="5" Margin="0,0,0,10" Padding="2" Background="#FFE68EF5" Canvas.Left="554" Canvas.Top="501">
-                <TextBox x:Name="slider_steps" Text="{Binding ElementName=slider_steps_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="474" Height="19" UndoLimit="111" Cursor="Hand" FontSize="9" Foreground="White" SelectionBrush="#000078D7" Background="#FFE68EF5" />
+                <TextBox x:Name="slider_steps" Text="{Binding ElementName=slider_steps_thumb, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Center" Width="28" Canvas.Left="550" Canvas.Top="474" Height="19" UndoLimit="111" Cursor="Hand" FontSize="9" Foreground="White" SelectionBrush="#000078D7" Background="#FFE68EF5" TextChanged="slider_steps_TextChanged" MaxLength="5" LostFocus="slider_steps_LostFocus"/>
             </Border>
             <!--#endregion-->
             <!--#region  Мотивация-->
             <Rectangle Fill="#FFE68EF5" Width="575" Height="80" RadiusX="15" RadiusY="15" Canvas.Left="15" Canvas.Top="564" />
             <Rectangle Fill="white" Width="557" Height="56" RadiusX="15" RadiusY="15" Canvas.Left="23" Canvas.Top="575" />
-            <TextBox Canvas.Left="37" Canvas.Top="586" Width="513" Height="34"/>
-            <TextBox Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68" IsReadOnlyCaretVisible="True"/>
+            <TextBox x:Name="text_motivation_of_day" Canvas.Left="35" Canvas.Top="590" Height="34" Width="207" Text="Твоя мотивация на день:" FontSize="16" FontWeight="Bold" Foreground="#FF742F68" IsReadOnlyCaretVisible="True" Cursor="Arrow"/>
             <TextBox x:Name="motivation_text"  Height="38" Canvas.Left="247" Canvas.Top="586" Text="TextBox" TextWrapping="Wrap" Width="303" FontStyle="Italic" FontSize="14" IsEnabled="False"/>
             <Viewbox Height="34" Canvas.Left="247" Canvas.Top="586" Width="314" />
             <!--#endregion-->

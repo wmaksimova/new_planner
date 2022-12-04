@@ -67,6 +67,9 @@ namespace planner4
             mood_text.IsReadOnly = true;
             sleep_text.IsReadOnly = true;
             steps_text.IsReadOnly = true;
+            count_of_affairs.IsReadOnly = true;
+            text_count_of_offairs.IsReadOnly = true;
+            text_motivation_of_day.IsReadOnly = true;
             date_text.Visibility = Visibility.Hidden;
             list_item_2.Visibility = Visibility.Hidden;
             list_item_3.Visibility = Visibility.Hidden;
@@ -80,7 +83,7 @@ namespace planner4
             check_box_5.Visibility = Visibility.Hidden;
             check_box_6.Visibility = Visibility.Hidden;
             check_box_7.Visibility = Visibility.Hidden;
-            StreamReader sr = new StreamReader("motivation.txt");
+            StreamReader sr = new StreamReader("../../../Resources/motivation.txt");
             string[] lines = sr.ReadToEnd().Split("\r\n");
             foreach (var item in lines)
             {
@@ -209,6 +212,8 @@ namespace planner4
                 CheckBox checkbox = Application.Current.MainWindow.FindName("check_box_" + n) as CheckBox;
                 checkbox.Visibility = Visibility.Hidden;
                 checkbox.IsChecked = false;
+                TextBox text = Application.Current.MainWindow.FindName("plan_" + n) as TextBox;
+                text.Text = "";
                 list.Visibility = Visibility.Hidden;
                 n--;
                 count_of_affairs.Text = n.ToString();
@@ -248,6 +253,7 @@ namespace planner4
                     else
                     {
                         db.plans.RemoveRange(db.plans.Where(x => x.rel_day_id == dayIndex));
+                        db.tracker.RemoveRange(db.tracker.Where(x => x.rel_tracker_day_id == dayIndex));
                         db.SaveChanges();
                     }
                     int countaff = 0;
@@ -320,6 +326,95 @@ namespace planner4
                 "Трекер сна - от 0 до 10(0 - ужасно, 10 - отлично)" + "\n" +
                 "Трекер шагов - от 0 до 10 000" + "\n" +
                 "4.Чтобы сохранить данные, нужно обязательно нажать на кнопку 'Сохранить'(при обновлении данных соответственно)");
+        }
+
+        private void slider_water_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string str = slider_water.Text;
+            foreach (char ch in str)
+            {
+                if (!char.IsDigit(ch))
+                {
+                    MessageBox.Show("Допустимо вводить только цифры! Проверьте ввод данных.");
+                    Logger.WriteLine("Недопустимый ввод данных в трекерах.");
+                    slider_water.Text = "0";
+                }
+            }
+        }
+
+        private void slider_mood_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string str = slider_mood.Text;
+            foreach (char ch in str)
+            {
+                if (!char.IsDigit(ch))
+                {
+                    MessageBox.Show("Допустимо вводить только цифры! Проверьте ввод данных.");
+                    Logger.WriteLine("Недопустимый ввод данных в трекерах.");
+                    slider_mood.Text = "0";
+                }
+            }
+        }
+
+        private void slider_sleep_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string str = slider_sleep.Text;
+            foreach (char ch in str)
+            {
+                if (!char.IsDigit(ch))
+                {
+                    MessageBox.Show("Допустимо вводить только цифры! Проверьте ввод данных.");
+                    Logger.WriteLine("Недопустимый ввод данных в трекерах.");
+                    slider_sleep.Text = "0";
+                }
+            }
+        }
+
+        private void slider_steps_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string str = slider_steps.Text;
+            foreach (char ch in str)
+            {
+                if (!char.IsDigit(ch))
+                {
+                    MessageBox.Show("Допустимо вводить только цифры! Проверьте ввод данных.");
+                    Logger.WriteLine("Недопустимый ввод данных в трекерах.");
+                    slider_steps.Text = "0";
+                }
+            }
+        }
+
+        private void slider_water_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string str = slider_water.Text;
+            if (str == "")
+            {
+                slider_water.Text = "0";
+            }
+        }
+        private void slider_mood_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string str = slider_mood.Text;
+            if (str == "")
+            {
+                slider_mood.Text = "0";
+            }
+        }
+        private void slider_sleep_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string str = slider_sleep.Text;
+            if (str == "")
+            {
+                slider_sleep.Text = "0";
+            }
+        }
+        private void slider_steps_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string str = slider_steps.Text;
+            if (str == "")
+            {
+                slider_steps.Text = "0";
+            }
         }
     }
     static class Logger
